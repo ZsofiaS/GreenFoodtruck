@@ -1,0 +1,12 @@
+{
+  "name": "GreenFoodtruck",
+  "displayName": "GreenFoodtruck",
+  "expo": {
+    "name": "GreenFoodtruck",
+    "slug": "GreenFoodtruck",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
