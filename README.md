@@ -30,7 +30,7 @@ expo start
 expo start -w
 ```
 This starts the app on localhost.
-* In the `cypress.json` file, replace the `baseUrl` with your own `localhost:<port>`, where url is the port where the app is running.
+* In the `cypress.json` file, replace the `baseUrl` with your own `<localhost>:<port>`, where url is the port where the app is running.
 
 * Run the tests in the terminal while the app is running:
 ```
