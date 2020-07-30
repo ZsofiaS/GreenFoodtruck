@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import prices from './prices.json'
 
 export default function App() {
   const [croissant, setCroissant] = useState(0);
@@ -33,32 +34,32 @@ export default function App() {
           <TouchableOpacity
             style={styles.button}
             onPress={cappuccinoPlus}>
-            <Text>Cappuccino</Text>
+            <Text>Cappuccino £{prices.cappuccino}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
             onPress={coffeePlus}>
-            <Text>Black coffee</Text>
+            <Text>Black coffee £{prices.coffee}</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.button}
             onPress={croissantPlus}>
-            <Text>Croissant</Text>
+            <Text>Croissant £{prices.croissant}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
             onPress={chocPlus}>
-            <Text>Pain au choc</Text>
+            <Text>Pain au choc £{prices.choc}</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.counterContainer}>
           <Text style={styles.orderTitle}>New Order:</Text>
-          <Text style={styles.counter}>{croissant} Croissant</Text>
-          <Text style={styles.counter}>{coffee} Black coffee</Text>
-          <Text style={styles.counter}>{cappuccino} Cappuccino</Text>
-          <Text style={styles.counter}>{choc} Pain au choc</Text>
+          <Text style={styles.counter}>{croissant} Croissant £</Text>
+          <Text style={styles.counter}>{coffee} Black coffee £</Text>
+          <Text style={styles.counter}>{cappuccino} Cappuccino £</Text>
+          <Text style={styles.counter}>{choc} Pain au choc £</Text>
         </View>
       <StatusBar style="auto" />
     </View>
