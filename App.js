@@ -1,7 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import prices from './prices.json'
+import prices from './prices.json';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+const truck = <Icon name="truck" size={40} color="#009933" />;
 
 export default function App() {
   const [croissant, setCroissant] = useState(0);
@@ -45,51 +48,63 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+
       <Text
         style={styles.title}
-        >Hello Mokus!</Text>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={cappuccinoPlus}>
-            <Text>Cappuccino £{prices.cappuccino}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={coffeePlus}>
-            <Text>Black coffee £{prices.coffee}</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={croissantPlus}>
-            <Text>Croissant £{prices.croissant}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={chocPlus}>
-            <Text>Pain au choc £{prices.choc}</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.counterContainer}>
-          <Text style={styles.orderTitle}>New Order:</Text>
+        >{truck}  Hello Mokus!
+      </Text>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={cappuccinoPlus}>
+          <Text>Cappuccino £{prices.cappuccino}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={coffeePlus}>
+          <Text>Black coffee £{prices.coffee}</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={croissantPlus}>
+          <Text>Croissant £{prices.croissant}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={chocPlus}>
+          <Text>Pain au choc £{prices.choc}</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.counterContainer}>
+        <Text style={styles.orderTitle}>New Order:</Text>
+        {croissant > 0 && (
           <Text style={styles.counter}>{croissant} Croissant £{calculatePrice(croissant, "croissant")}</Text>
+        )}
+        {coffee > 0 && (
           <Text style={styles.counter}>{coffee} Black coffee £{calculatePrice(coffee, "coffee")}</Text>
-          <Text style={styles.counter}>{cappuccino} Cappuccino £{calculatePrice(cappuccino, "cappuccino")}</Text>
-          <Text style={styles.counter}>{choc} Pain au choc £{calculatePrice(choc, "choc")}</Text>
-          <Text style={styles.orderTitle}>Total: £{total}</Text>
-        </View>
+        )}
+        {cappuccino > 0 && (
+            <Text style={styles.counter}>{cappuccino} Cappuccino £{calculatePrice(cappuccino, "cappuccino")}</Text>
+        )}
+        {choc > 0 && (
+            <Text style={styles.counter}>{choc} Pain au choc £{calculatePrice(choc, "choc")}</Text>
+        )}
+        <Text style={styles.orderTitle}>Total: £{total}</Text>
+      </View>
+      <View style={styles.checkoutContainer}>
         <TouchableOpacity
           style={styles.button}
           onPress={cancelOrder}>
-          <Text>Cancel</Text>
+          <Text>CANCEL</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={cancelOrder}>
-          <Text>Pay</Text>
+          <Text>PAY</Text>
         </TouchableOpacity>
+      </View>
       <StatusBar style="auto" />
     </View>
   );
@@ -98,7 +113,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'gainsboro',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -108,11 +123,20 @@ const styles = StyleSheet.create({
   button: {
     marginVertical: 10,
     marginHorizontal: 10,
-    backgroundColor: 'white',
+    backgroundColor: 'gainsboro',
     padding: 10,
     borderRadius: 5,
     width: 100,
-    alignItems: 'center'
+    alignItems: 'center',
+    shadowColor: "#000",
+    shadowOffset: {
+    	width: 0,
+    	height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
   counterContainer: {
     flexDirection: 'column'
@@ -126,6 +150,10 @@ const styles = StyleSheet.create({
     textAlign: 'left'
   },
   title: {
-    marginVertical: 10
-  }
+    marginVertical: 20
+  },
+  checkoutContainer: {
+    marginVertical: 20,
+    flexDirection: 'row'
+  },
 });
