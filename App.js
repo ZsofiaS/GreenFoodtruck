@@ -5,6 +5,8 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 export default function App() {
   const [croissant, setCroissant] = useState(0);
   const [coffee, setCoffee] = useState(0);
+  const [cappuccino, setCappuccino] = useState(0);
+  const [choc, setChoc] = useState(0);
 
   const croissantPlus = () => {
     setCroissant(prevCroissant => prevCroissant + 1)
@@ -12,6 +14,14 @@ export default function App() {
 
   const coffeePlus = () => {
     setCoffee(prevCoffee => prevCoffee + 1)
+  }
+
+  const cappuccinoPlus = () => {
+    setCappuccino(prevCappuccino => prevCappuccino + 1)
+  }
+
+  const chocPlus = () => {
+    setChoc(prevChoc => prevChoc + 1)
   }
 
   return (
@@ -22,18 +32,33 @@ export default function App() {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.button}
+            onPress={cappuccinoPlus}>
+            <Text>Cappuccino</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={coffeePlus}>
+            <Text>Black coffee</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.button}
             onPress={croissantPlus}>
             <Text>Croissant</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
-            onPress={coffeePlus}>
-            <Text>Coffee</Text>
+            onPress={chocPlus}>
+            <Text>Pain au choc</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.counterContainer}>
-          <Text style={styles.counter}>{croissant}</Text>
-          <Text style={styles.counter}>{coffee}</Text>
+          <Text style={styles.orderTitle}>New Order:</Text>
+          <Text style={styles.counter}>{croissant} Croissant</Text>
+          <Text style={styles.counter}>{coffee} Black coffee</Text>
+          <Text style={styles.counter}>{cappuccino} Cappuccino</Text>
+          <Text style={styles.counter}>{choc} Pain au choc</Text>
         </View>
       <StatusBar style="auto" />
     </View>
@@ -60,11 +85,15 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   counterContainer: {
-    flexDirection: 'row'
+    flexDirection: 'column'
   },
   counter: {
-    marginVertical: 10,
+    marginVertical: 5,
     marginHorizontal: 10,
+  },
+  orderTitle: {
+    fontSize: 20,
+    textAlign: 'left'
   },
   title: {
     marginVertical: 10
