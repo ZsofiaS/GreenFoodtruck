@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import prices from './prices.json';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const truck = <Icon name="truck" size={40} color="#009933" />;
+const truck = <Icon name="truck" size={40} color="#00cc44" />;
 
 export default function App() {
   const [croissant, setCroissant] = useState(0);
@@ -57,24 +57,24 @@ export default function App() {
         <TouchableOpacity
           style={styles.button}
           onPress={cappuccinoPlus}>
-          <Text>Cappuccino £{prices.cappuccino}</Text>
+          <Text style={styles.buttonText}>Cappuccino £{prices.cappuccino}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={coffeePlus}>
-          <Text>Black coffee £{prices.coffee}</Text>
+          <Text style={styles.buttonText}>Black coffee £{prices.coffee}</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.button}
           onPress={croissantPlus}>
-          <Text>Croissant £{prices.croissant}</Text>
+          <Text style={styles.buttonText}>Croissant £{prices.croissant}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={chocPlus}>
-          <Text>Pain au choc £{prices.choc}</Text>
+          <Text style={styles.buttonText}>Pain au choc £{prices.choc}</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.counterContainer}>
@@ -95,12 +95,12 @@ export default function App() {
       </View>
       <View style={styles.checkoutContainer}>
         <TouchableOpacity
-          style={styles.button}
+          style={styles.checkoutButton}
           onPress={cancelOrder}>
           <Text>CANCEL</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button}
+          style={styles.checkoutButton}
           onPress={cancelOrder}>
           <Text>PAY</Text>
         </TouchableOpacity>
@@ -138,8 +138,12 @@ const styles = StyleSheet.create({
 
     elevation: 5,
   },
+  buttonText: {
+    color: 'black',
+  },
   counterContainer: {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    marginVertical: 20,
   },
   counter: {
     marginVertical: 5,
@@ -150,10 +154,28 @@ const styles = StyleSheet.create({
     textAlign: 'left'
   },
   title: {
-    marginVertical: 20
+    marginVertical: 20,
+    fontSize: 20
   },
   checkoutContainer: {
-    marginVertical: 20,
-    flexDirection: 'row'
+    marginVertical: 10,
   },
+  checkoutButton: {
+    marginVertical: 10,
+    marginHorizontal: 10,
+    backgroundColor: 'gainsboro',
+    padding: 10,
+    borderRadius: 5,
+    width: 100,
+    alignItems: 'center',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    width: 200
+  }
 });
