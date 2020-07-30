@@ -8,21 +8,39 @@ export default function App() {
   const [coffee, setCoffee] = useState(0);
   const [cappuccino, setCappuccino] = useState(0);
   const [choc, setChoc] = useState(0);
+  const [total, setTotal] = useState(0);
 
   const croissantPlus = () => {
-    setCroissant(prevCroissant => prevCroissant + 1)
+    setCroissant(prevCroissant => prevCroissant + 1);
+    setTotal(prevTotal => prevTotal + prices["croissant"]);
   }
 
   const coffeePlus = () => {
-    setCoffee(prevCoffee => prevCoffee + 1)
+    setCoffee(prevCoffee => prevCoffee + 1);
+    setTotal(prevTotal => prevTotal + prices["coffee"]);
   }
 
   const cappuccinoPlus = () => {
-    setCappuccino(prevCappuccino => prevCappuccino + 1)
+    setCappuccino(prevCappuccino => prevCappuccino + 1);
+    setTotal(prevTotal => prevTotal + prices["cappuccino"]);
   }
 
   const chocPlus = () => {
-    setChoc(prevChoc => prevChoc + 1)
+    setChoc(prevChoc => prevChoc + 1);
+    setTotal(prevTotal => prevTotal + prices["choc"]);
+  }
+
+  const calculatePrice = (number, item) => {
+    let lineTotal = number * prices[item];
+    return lineTotal;
+  }
+
+  const cancelOrder = () => {
+    setTotal(0);
+    setCroissant(0);
+    setCappuccino(0);
+    setCoffee(0);
+    setChoc(0);
   }
 
   return (
@@ -56,11 +74,22 @@ export default function App() {
         </View>
         <View style={styles.counterContainer}>
           <Text style={styles.orderTitle}>New Order:</Text>
-          <Text style={styles.counter}>{croissant} Croissant £</Text>
-          <Text style={styles.counter}>{coffee} Black coffee £</Text>
-          <Text style={styles.counter}>{cappuccino} Cappuccino £</Text>
-          <Text style={styles.counter}>{choc} Pain au choc £</Text>
+          <Text style={styles.counter}>{croissant} Croissant £{calculatePrice(croissant, "croissant")}</Text>
+          <Text style={styles.counter}>{coffee} Black coffee £{calculatePrice(coffee, "coffee")}</Text>
+          <Text style={styles.counter}>{cappuccino} Cappuccino £{calculatePrice(cappuccino, "cappuccino")}</Text>
+          <Text style={styles.counter}>{choc} Pain au choc £{calculatePrice(choc, "choc")}</Text>
+          <Text style={styles.orderTitle}>Total: £{total}</Text>
         </View>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={cancelOrder}>
+          <Text>Cancel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={cancelOrder}>
+          <Text>Pay</Text>
+        </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
   );
