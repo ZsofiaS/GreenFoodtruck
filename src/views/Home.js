@@ -8,6 +8,29 @@ import Product from '../components/Product';
 
 const truck = <Icon name="truck" size={40} color="#00cc44" />;
 
+const products = [
+  {
+    name: 'croissant',
+    price: 3,
+    img: 'https://dl.dropboxusercontent.com/s/fsbb6ng6o8iaaic/croissant.jpg?dl=0'
+  },
+  {
+    name: 'coffee',
+    price: 2.50,
+    img: 'https://dl.dropboxusercontent.com/s/z2qlx5e26wge6sl/coffee.jpg?dl=0'
+  },
+  {
+    name: 'cappuccino',
+    price: 3,
+    img: 'https://dl.dropboxusercontent.com/s/4j2ayubqv1dz3ws/cappuccino.jpg?dl=0'
+  },
+  {
+    name: 'choc',
+    price: 3,
+    img: 'https://dl.dropboxusercontent.com/s/oea9u1090i2yihz/choc.jpg?dl=0'
+  }
+]
+
 export default function Home({navigation}) {
   const [croissant, setCroissant] = useState(0);
   const [coffee, setCoffee] = useState(0);
@@ -54,13 +77,21 @@ export default function Home({navigation}) {
       <View style={styles.buttonContainer}>
         <Text
           style={styles.title}
-          >{truck}  Hello Mokus!
+          >{truck}  Green Food Truck
         </Text>
       </View>
       <View style={styles.productContainer}>
-          <Product style={styles.product}/>
-          <Product style={styles.product}/>
+        {
+          products.map((product, i) => {
+            return(
+              <View key={i}>
+                <Product product={product}/>
+              </View>
+            )
+          })
+        }
       </View>
+      {/*
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.button}
@@ -85,8 +116,8 @@ export default function Home({navigation}) {
           <Text style={styles.buttonText}>Pain au choc £{prices.choc}</Text>
         </TouchableOpacity>
       </View>
+      */}
       <View style={styles.counterContainer}>
-        <Text style={styles.orderTitle}>New Order:</Text>
         {croissant > 0 && (
           <Text style={styles.counter}>{croissant} Croissant £{calculatePrice(croissant, "croissant")}</Text>
         )}
@@ -134,7 +165,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   productContainer: {
-    flexDirection: 'row'
+    marginHorizontal: 20,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    flex: 1,
+    flexWrap: 'wrap'
   },
   product: {
     flexDirection: 'column'

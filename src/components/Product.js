@@ -3,16 +3,18 @@ import { Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Tile, Button, Avatar } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 
-export default function Product({navigation}) {
+export default function Product(props) {
   return(
       <TouchableOpacity
         style={styles.button}
-        onPress={() => console.log("hello")}
+        onPress={() => console.log(typeof `${props.product.img}`)}
         >
         <Image
           style={styles.image}
-          source={require('../../images/croissant.jpg')} />
-        <Text>Croissant</Text>
+          /* source={require(`${props.product.img}`)} /> */
+          source={{ uri: props.product.img }} />
+        <Text>{props.product.name}</Text>
+        <Text>{props.product.price}</Text>
       </TouchableOpacity>
   )
 }
@@ -33,7 +35,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5,
   },
   image: {
