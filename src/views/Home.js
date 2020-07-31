@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Button, ScrollView } from 'react-native';
 import prices from '../prices.json';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { withNavigation } from 'react-navigation';
+import Product from '../components/Product';
 
 const truck = <Icon name="truck" size={40} color="#00cc44" />;
 
@@ -48,11 +49,18 @@ export default function Home({navigation}) {
   }
 
   return (
+    <ScrollView>
     <View style={styles.container}>
-      <Text
-        style={styles.title}
-        >{truck}  Hello Mokus!
-      </Text>
+      <View style={styles.buttonContainer}>
+        <Text
+          style={styles.title}
+          >{truck}  Hello Mokus!
+        </Text>
+      </View>
+      <View style={styles.productContainer}>
+          <Product style={styles.product}/>
+          <Product style={styles.product}/>
+      </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.button}
@@ -110,16 +118,26 @@ export default function Home({navigation}) {
         title='Go to materials'
         />
       <StatusBar style="auto" />
-    </View>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  text: {
+    fontSize: 60
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  productContainer: {
+    flexDirection: 'row'
+  },
+  product: {
+    flexDirection: 'column'
   },
   buttonContainer: {
     flexDirection: 'row'
