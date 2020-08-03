@@ -2,12 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Button, ScrollView } from 'react-native';
 import prices from '../prices.json';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { withNavigation } from 'react-navigation';
 import Product from '../components/Product';
 import Header from '../components/Header';
-
-const truck = <Icon name="truck" size={40} color="#00cc44" />;
 
 const products = [
   {
