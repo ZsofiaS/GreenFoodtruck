@@ -5,6 +5,7 @@ import prices from '../prices.json';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { withNavigation } from 'react-navigation';
 import Product from '../components/Product';
+import Header from '../components/Header';
 
 const truck = <Icon name="truck" size={40} color="#00cc44" />;
 
@@ -72,14 +73,10 @@ export default function Home({navigation}) {
   }
 
   return (
+    <>
+    <Header />
     <ScrollView>
     <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        <Text
-          style={styles.title}
-          >{truck}  Green Food Truck
-        </Text>
-      </View>
       <View style={styles.productContainer}>
         {
           products.map((product, i) => {
@@ -151,6 +148,7 @@ export default function Home({navigation}) {
       <StatusBar style="auto" />
       </View>
     </ScrollView>
+    </>
   );
 }
 

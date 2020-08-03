@@ -6,11 +6,11 @@ const Navigator = createStackNavigator(
   {
     Home: {
       screen: Home,
-      navigationOptions: { title: 'Home'}
+      /*navigationOptions: { title: 'Home'}*/
     },
     MaterialList: {
       screen: MaterialList,
-      navigationOptions: { title: 'Materials'}
+      /* navigationOptions: { title: 'Materials'} */
     }
   },
   {
