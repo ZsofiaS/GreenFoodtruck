@@ -32,7 +32,7 @@ const products = [
   }
 ]
 
-export default function Home({navigation}) {
+export default function HomeScreen({navigation}) {
   const [croissant, setCroissant] = useState(0);
   const [coffee, setCoffee] = useState(0);
   const [cappuccino, setCappuccino] = useState(0);
@@ -74,7 +74,6 @@ export default function Home({navigation}) {
 
   return (
     <>
-    <Header />
     <ScrollView>
     <View style={styles.container}>
       <View style={styles.productContainer}>
@@ -142,7 +141,7 @@ export default function Home({navigation}) {
         </TouchableOpacity>
       </View>
       <Button
-        onPress={() => navigation.navigate('MaterialList')}
+        onPress={() => navigation.navigate('Materials')}
         title='Go to materials'
         />
       <StatusBar style="auto" />

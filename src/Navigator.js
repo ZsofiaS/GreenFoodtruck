@@ -1,21 +1,32 @@
 import { createStackNavigator } from 'react-navigation-stack';
-import Home from './views/Home';
-import MaterialList from './views/MaterialList';
+import { createAppContainer } from 'react-navigation';
+import HomeScreen from './views/HomeScreen';
+import MaterialScreen from './views/MaterialScreen';
+import Colors from '../constants/Colors';
 
 const Navigator = createStackNavigator(
   {
     Home: {
-      screen: Home,
-      /*navigationOptions: { title: 'Home'}*/
+      screen: HomeScreen,
+      navigationOptions: {
+        headerTitle: 'Home'
+      }
     },
-    MaterialList: {
-      screen: MaterialList,
-      /* navigationOptions: { title: 'Materials'} */
+    Materials: {
+      screen: MaterialScreen,
+      navigationOptions: {
+        headerTitle: 'Materials'
+      }
     }
   },
-  {
-    initialRouteName: 'Home'
-  }
+    {
+      defaultNavigationOptions: {
+        headerStyle: {
+          backgroundColor: Colors.primaryColor,
+        },
+        headerTintColor: 'white'
+      }
+    }
 );
 
-export default Navigator;
+export default createAppContainer(Navigator);
