@@ -11,10 +11,9 @@ export default function Product(props) {
         >
         <Image
           style={styles.image}
-          /* source={require(`${props.product.img}`)} /> */
           source={{ uri: props.product.img }} />
         <Text>{props.product.name}</Text>
-        <Text>{props.product.price}</Text>
+        <Text>£{props.product.price}</Text>
       </TouchableOpacity>
   )
 }
@@ -26,7 +25,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 5,
-    width: 100,
+    width: 120,
     alignItems: 'center',
     shadowColor: "#000",
     shadowOffset: {

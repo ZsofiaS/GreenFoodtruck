@@ -5,29 +5,7 @@ import prices from '../prices.json';
 import { withNavigation } from 'react-navigation';
 import Product from '../components/Product';
 import Header from '../components/Header';
-
-const products = [
-  {
-    name: 'croissant',
-    price: 3,
-    img: 'https://dl.dropboxusercontent.com/s/fsbb6ng6o8iaaic/croissant.jpg?dl=0'
-  },
-  {
-    name: 'coffee',
-    price: 2.50,
-    img: 'https://dl.dropboxusercontent.com/s/z2qlx5e26wge6sl/coffee.jpg?dl=0'
-  },
-  {
-    name: 'cappuccino',
-    price: 3,
-    img: 'https://dl.dropboxusercontent.com/s/4j2ayubqv1dz3ws/cappuccino.jpg?dl=0'
-  },
-  {
-    name: 'choc',
-    price: 3,
-    img: 'https://dl.dropboxusercontent.com/s/oea9u1090i2yihz/choc.jpg?dl=0'
-  }
-]
+import {products} from '../../constants/Products';
 
 export default function HomeScreen({navigation}) {
   const [croissant, setCroissant] = useState(0);
@@ -136,11 +114,12 @@ export default function HomeScreen({navigation}) {
           onPress={cancelOrder}>
           <Text>PAY</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.checkoutButton}
+          onPress={() => navigation.navigate('Materials')}>
+            <Text>MATERIALS</Text>
+        </TouchableOpacity>
       </View>
-      <Button
-        onPress={() => navigation.navigate('Materials')}
-        title='Go to materials'
-        />
       <StatusBar style="auto" />
       </View>
     </ScrollView>
@@ -186,7 +165,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5,
   },
   buttonText: {
