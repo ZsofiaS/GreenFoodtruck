@@ -6,6 +6,7 @@ import { withNavigation } from 'react-navigation';
 import Product from '../components/Product';
 import Header from '../components/Header';
 import {products} from '../../constants/Products';
+import Colors from '../../constants/Colors';
 
 export default function HomeScreen({navigation}) {
   const [total, setTotal] = useState(0);
@@ -20,7 +21,7 @@ export default function HomeScreen({navigation}) {
 
   return (
     <>
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
       <View style={styles.productContainer}>
         {
@@ -74,23 +75,27 @@ export default function HomeScreen({navigation}) {
 
       </View>
       */}
-      <Text style={styles.orderTitle}>Total: £{total}</Text>
+      <View style={styles.counterContainer}>
+        <Text style={styles.orderTitle}>Total: £{total}</Text>
+      </View>
       <View style={styles.checkoutContainer}>
         <TouchableOpacity
-          style={styles.checkoutButton}
+          style={[styles.checkoutButton, styles.cancelButton]}
           onPress={cancelOrder}>
-          <Text>CANCEL</Text>
+          <Text style={styles.buttonText}>CANCEL</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.checkoutButton}
+          style={[styles.checkoutButton, styles.payButton]}
           onPress={cancelOrder}>
-          <Text>PAY</Text>
+          <Text style={styles.buttonText}>PAY</Text>
         </TouchableOpacity>
+        {/*
         <TouchableOpacity
           style={styles.checkoutButton}
           onPress={() => navigation.navigate('Materials')}>
             <Text>MATERIALS</Text>
         </TouchableOpacity>
+        */}
       </View>
       <StatusBar style="auto" />
       </View>
@@ -103,11 +108,15 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 60
   },
+  scrollContainer: {
+    backgroundColor: 'white',
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    marginVertical: 30
   },
   productContainer: {
     marginHorizontal: 20,
@@ -125,7 +134,7 @@ const styles = StyleSheet.create({
   button: {
     marginVertical: 10,
     marginHorizontal: 10,
-    backgroundColor: 'gainsboro',
+    backgroundColor: 'white',
     padding: 10,
     borderRadius: 5,
     width: 100,
@@ -140,7 +149,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   buttonText: {
-    color: 'black',
+    color: 'white',
   },
   counterContainer: {
     flexDirection: 'column',
@@ -159,15 +168,17 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   checkoutContainer: {
-    marginVertical: 10,
+    marginVertical: 20,
+    marginHorizontal: 20,
+    flexDirection: 'row'
   },
   checkoutButton: {
     marginVertical: 10,
-    marginHorizontal: 10,
+    marginHorizontal: 15,
     backgroundColor: 'gainsboro',
     padding: 10,
     borderRadius: 5,
-    width: 100,
+    width: 140,
     alignItems: 'center',
     shadowColor: "#000",
     shadowOffset: {
@@ -177,6 +188,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    width: 200
+  },
+  cancelButton: {
+    backgroundColor: 'red'
+  },
+  payButton: {
+    backgroundColor: Colors.primaryColor
   }
 });
