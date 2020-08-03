@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 5,
-    width: 120,
+    width: 145,
     alignItems: 'center',
     shadowColor: "#000",
     shadowOffset: {
@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   image: {
-    width: 90,
-    height: 90
+    width: 120,
+    height: 120
   },
 
 })

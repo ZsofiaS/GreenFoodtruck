@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
+    fontSize: 17,
   },
   counterContainer: {
     flexDirection: 'column',

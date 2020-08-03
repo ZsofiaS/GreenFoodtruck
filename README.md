@@ -3,7 +3,7 @@
 An app to follow sales and stock levels of a local foodtruck.
 
 ### Home screen
-![screenshot home](./images/screen2.png)
+![screenshot home](./images/screen4.png)
 
 ### Tech used:
 * React Native
