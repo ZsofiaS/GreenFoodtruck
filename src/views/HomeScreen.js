@@ -8,43 +8,14 @@ import Header from '../components/Header';
 import {products} from '../../constants/Products';
 
 export default function HomeScreen({navigation}) {
-  const [croissant, setCroissant] = useState(0);
-  const [coffee, setCoffee] = useState(0);
-  const [cappuccino, setCappuccino] = useState(0);
-  const [choc, setChoc] = useState(0);
   const [total, setTotal] = useState(0);
 
-  const croissantPlus = () => {
-    setCroissant(prevCroissant => prevCroissant + 1);
-    setTotal(prevTotal => prevTotal + prices["croissant"]);
-  }
-
-  const coffeePlus = () => {
-    setCoffee(prevCoffee => prevCoffee + 1);
-    setTotal(prevTotal => prevTotal + prices["coffee"]);
-  }
-
-  const cappuccinoPlus = () => {
-    setCappuccino(prevCappuccino => prevCappuccino + 1);
-    setTotal(prevTotal => prevTotal + prices["cappuccino"]);
-  }
-
-  const chocPlus = () => {
-    setChoc(prevChoc => prevChoc + 1);
-    setTotal(prevTotal => prevTotal + prices["choc"]);
-  }
-
-  const calculatePrice = (number, item) => {
-    let lineTotal = number * prices[item];
-    return lineTotal;
+  const calculateTotal = (price) => {
+    setTotal(prevTotal => prevTotal + price)
   }
 
   const cancelOrder = () => {
     setTotal(0);
-    setCroissant(0);
-    setCappuccino(0);
-    setCoffee(0);
-    setChoc(0);
   }
 
   return (
@@ -56,7 +27,7 @@ export default function HomeScreen({navigation}) {
           products.map((product, i) => {
             return(
               <View key={i}>
-                <Product product={product}/>
+                <Product product={product} printProduct={() => calculateTotal(product.price)}/>
               </View>
             )
           })
@@ -87,7 +58,6 @@ export default function HomeScreen({navigation}) {
           <Text style={styles.buttonText}>Pain au choc £{prices.choc}</Text>
         </TouchableOpacity>
       </View>
-      */}
       <View style={styles.counterContainer}>
         {croissant > 0 && (
           <Text style={styles.counter}>{croissant} Croissant £{calculatePrice(croissant, "croissant")}</Text>
@@ -101,8 +71,10 @@ export default function HomeScreen({navigation}) {
         {choc > 0 && (
             <Text style={styles.counter}>{choc} Pain au choc £{calculatePrice(choc, "choc")}</Text>
         )}
-        <Text style={styles.orderTitle}>Total: £{total}</Text>
+
       </View>
+      */}
+      <Text style={styles.orderTitle}>Total: £{total}</Text>
       <View style={styles.checkoutContainer}>
         <TouchableOpacity
           style={styles.checkoutButton}

@@ -7,7 +7,7 @@ export default function Product(props) {
   return(
       <TouchableOpacity
         style={styles.button}
-        onPress={() => console.log(typeof `${props.product.img}`)}
+        onPress={() => props.printProduct()}
         >
         <Image
           style={styles.image}
