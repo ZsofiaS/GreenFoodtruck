@@ -7,19 +7,28 @@ import Product from '../components/Product';
 import Header from '../components/Header';
 import {products} from '../../constants/Products';
 import Colors from '../../constants/Colors';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { addProduct } from '../../store/actions/bills';
 
 export default function HomeScreen({navigation}) {
   const [total, setTotal] = useState(0);
 
   const availableProducts = useSelector(state => state.bills.products);
 
-  const calculateTotal = (price) => {
-    setTotal(prevTotal => prevTotal + price)
+  const calculateTotal = (price, id) => {
+    setTotal(prevTotal => prevTotal + price);
+    addProductHandler(id);
   }
 
   const cancelOrder = () => {
     setTotal(0);
+  }
+
+  const dispatch = useDispatch();
+
+  const addProductHandler = (id) => {
+    console.log(id);
+    dispatch(addProduct(id));
   }
 
   return (
@@ -31,7 +40,7 @@ export default function HomeScreen({navigation}) {
           availableProducts.map((product, i) => {
             return(
               <View key={i}>
-                <Product product={product} printProduct={() => calculateTotal(product.price)}/>
+                <Product product={product} printProduct={() => calculateTotal(product.price, product.id)}/>
               </View>
             )
           })
