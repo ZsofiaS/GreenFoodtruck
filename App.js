@@ -2,6 +2,15 @@ import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import Navigator from './src/Navigator';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import billsReducer from './store/reducers/bills';
+
+const rootReducer = combineReducers({
+  bills: billsReducer
+});
+
+const store = createStore(rootReducer);
 
 // import * as Font from 'expo-font';
 // import { AppLoading } from 'expo';
@@ -15,5 +24,9 @@ import Navigator from './src/Navigator';
 // export default createAppContainer(Navigator);
 
 export default function App() {
-  return <Navigator />;
+  return (
+    <Provider store={store}>
+      <Navigator />
+    </Provider>
+  );
 }

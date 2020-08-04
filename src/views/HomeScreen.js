@@ -7,9 +7,12 @@ import Product from '../components/Product';
 import Header from '../components/Header';
 import {products} from '../../constants/Products';
 import Colors from '../../constants/Colors';
+import { useSelector } from 'react-redux';
 
 export default function HomeScreen({navigation}) {
   const [total, setTotal] = useState(0);
+
+  const availableProducts = useSelector(state => state.bills.products);
 
   const calculateTotal = (price) => {
     setTotal(prevTotal => prevTotal + price)
@@ -25,7 +28,7 @@ export default function HomeScreen({navigation}) {
     <View style={styles.container}>
       <View style={styles.productContainer}>
         {
-          products.map((product, i) => {
+          availableProducts.map((product, i) => {
             return(
               <View key={i}>
                 <Product product={product} printProduct={() => calculateTotal(product.price)}/>
