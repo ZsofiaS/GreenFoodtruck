@@ -8,7 +8,7 @@ import Header from '../components/Header';
 import {products} from '../../constants/Products';
 import Colors from '../../constants/Colors';
 import { useSelector, useDispatch } from 'react-redux';
-import { addProduct } from '../../store/actions/bills';
+import { addProduct, resetBill } from '../../store/actions/bills';
 
 export default function HomeScreen({navigation}) {
   const [total, setTotal] = useState(0);
@@ -22,13 +22,17 @@ export default function HomeScreen({navigation}) {
 
   const cancelOrder = () => {
     setTotal(0);
+    resetBillHandler();
   }
 
   const dispatch = useDispatch();
 
   const addProductHandler = (id) => {
-    console.log(id);
     dispatch(addProduct(id));
+  }
+
+  const resetBillHandler = () => {
+    dispatch(resetBill());
   }
 
   return (
