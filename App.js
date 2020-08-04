@@ -4,10 +4,10 @@ import { createAppContainer } from 'react-navigation';
 import Navigator from './src/Navigator';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import billsReducer from './store/reducers/bills';
+import orderReducer from './store/reducers/orders';
 
 const rootReducer = combineReducers({
-  bills: billsReducer
+  order: orderReducer
 });
 
 const store = createStore(rootReducer);
