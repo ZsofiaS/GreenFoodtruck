@@ -5,6 +5,7 @@ import prices from '../prices.json';
 import { withNavigation } from 'react-navigation';
 import Product from '../components/Product';
 import Header from '../components/Header';
+import OrderItem from '../components/OrderItem';
 import {products} from '../../constants/Products';
 import Colors from '../../constants/Colors';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,6 +15,20 @@ export default function HomeScreen({navigation}) {
   const [total, setTotal] = useState(0);
 
   const availableProducts = useSelector(state => state.order.products);
+  const totalAmount = useSelector(state => state.order.totalAmount);
+  const addedProducts = useSelector(state => {
+    const addedProductsArray = [];
+    for (const key in state.order.order) {
+      addedProductsArray.push({
+        productId: key,
+        productName: state.order.order[key].name,
+        productPrice: state.order.order[key].price,
+        quantity: state.order.order[key].quantity,
+        sum: state.order.order[key].sum
+      });
+    }
+    return addedProductsArray;
+  });
 
   const calculateTotal = (product) => {
     setTotal(prevTotal => prevTotal + product.price);
@@ -50,49 +65,22 @@ export default function HomeScreen({navigation}) {
           })
         }
       </View>
-      {/*
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={cappuccinoPlus}>
-          <Text style={styles.buttonText}>Cappuccino £{prices.cappuccino}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={coffeePlus}>
-          <Text style={styles.buttonText}>Black coffee £{prices.coffee}</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={croissantPlus}>
-          <Text style={styles.buttonText}>Croissant £{prices.croissant}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={chocPlus}>
-          <Text style={styles.buttonText}>Pain au choc £{prices.choc}</Text>
-        </TouchableOpacity>
-      </View>
       <View style={styles.counterContainer}>
-        {croissant > 0 && (
-          <Text style={styles.counter}>{croissant} Croissant £{calculatePrice(croissant, "croissant")}</Text>
-        )}
-        {coffee > 0 && (
-          <Text style={styles.counter}>{coffee} Black coffee £{calculatePrice(coffee, "coffee")}</Text>
-        )}
-        {cappuccino > 0 && (
-            <Text style={styles.counter}>{cappuccino} Cappuccino £{calculatePrice(cappuccino, "cappuccino")}</Text>
-        )}
-        {choc > 0 && (
-            <Text style={styles.counter}>{choc} Pain au choc £{calculatePrice(choc, "choc")}</Text>
-        )}
-
-      </View>
-      */}
-      <View style={styles.counterContainer}>
-        <Text style={styles.orderTitle}>Total: £{total}</Text>
+        <Text style={styles.orderTitle}>Order</Text>
+        {
+          addedProducts.map((product, id) => {
+            return(
+              <OrderItem
+                key={product.productId}
+                name={product.productName}
+                price={product.productPrice}
+                quantity={product.quantity}
+                sum={product.sum}
+                />
+            )
+          })
+        }
+        <Text style={styles.orderTitle}>Total: £{totalAmount}</Text>
       </View>
       <View style={styles.checkoutContainer}>
         <TouchableOpacity
