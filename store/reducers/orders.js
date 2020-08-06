@@ -2,6 +2,7 @@ import {products} from '../../constants/Products';
 import ProductAdded from '../../models/ProductAdded';
 import { ADD_PRODUCT }  from '../actions/orders';
 import { RESET_ORDER } from '../actions/orders';
+import { SAVE_ORDER } from '../actions/orders';
 
 const initialState = {
   products: products,
@@ -35,6 +36,8 @@ const orderReducer = (state = initialState, action) => {
           totalAmount: state.totalAmount + productPrice
         }
     case RESET_ORDER:
+      return { ...state, order: {}, totalAmount: 0}
+    case SAVE_ORDER:
       return { ...state, order: {}, totalAmount: 0}
     default:
       return state;
