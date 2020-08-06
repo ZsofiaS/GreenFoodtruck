@@ -33,6 +33,7 @@ export default function HomeScreen({navigation}) {
   const calculateTotal = (product) => {
     setTotal(prevTotal => prevTotal + product.price);
     addProductHandler(product);
+    console.log(addedProducts[0]);
   }
 
   const cancelOrder = () => {

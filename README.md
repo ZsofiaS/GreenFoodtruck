@@ -8,7 +8,7 @@ An app to follow sales and stock levels of a local foodtruck.
 ### Tech used:
 * React Native
 * Redux
-* SQLite
+* React Native Firebase
 * Cypress
 * Jest & React native testing library
 
