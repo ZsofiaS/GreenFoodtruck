@@ -1,5 +1,6 @@
 import {products} from '../../constants/Products';
 import ProductAdded from '../../models/ProductAdded';
+import OrderAdded from '../../models/OrderAdded';
 import { ADD_PRODUCT }  from '../actions/orders';
 import { RESET_ORDER } from '../actions/orders';
 import { SAVE_ORDER } from '../actions/orders';
@@ -7,7 +8,8 @@ import { SAVE_ORDER } from '../actions/orders';
 const initialState = {
   products: products,
   order: {},
-  totalAmount: 0
+  totalAmount: 0,
+  orders: []
 }
 
 const orderReducer = (state = initialState, action) => {
@@ -38,7 +40,15 @@ const orderReducer = (state = initialState, action) => {
     case RESET_ORDER:
       return { ...state, order: {}, totalAmount: 0}
     case SAVE_ORDER:
-      return { ...state, order: {}, totalAmount: 0}
+      const currentOrder = action.products;
+      const total = action.total
+      const date = new Date().toString();
+      let orderToBeAdded = new OrderAdded(currentOrder, total, date);
+      return {
+        ...state,
+        order: {},
+        totalAmount: 0,
+        orders: [...state.orders, orderToBeAdded]}
     default:
       return state;
   }

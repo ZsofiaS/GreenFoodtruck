@@ -9,10 +9,12 @@ import OrderItem from '../components/OrderItem';
 import {products} from '../../constants/Products';
 import Colors from '../../constants/Colors';
 import { useSelector, useDispatch } from 'react-redux';
-import { addProduct, resetOrder } from '../../store/actions/orders';
+import { addProduct, resetOrder, saveOrder } from '../../store/actions/orders';
+import { useFirebase } from 'react-redux-firebase';
 
 export default function HomeScreen({navigation}) {
   const [total, setTotal] = useState(0);
+  const firebase = useFirebase();
 
   const availableProducts = useSelector(state => state.order.products);
   const totalAmount = useSelector(state => state.order.totalAmount);
@@ -30,15 +32,20 @@ export default function HomeScreen({navigation}) {
     return addedProductsArray;
   });
 
+  const orders = useSelector(state => state.order.orders);
+
   const calculateTotal = (product) => {
     setTotal(prevTotal => prevTotal + product.price);
     addProductHandler(product);
-    console.log(addedProducts[0]);
   }
 
   const cancelOrder = () => {
-    setTotal(0);
+    //setTotal(0);
     resetOrderHandler();
+  }
+
+  const payForOrder = () => {
+    saveOrderHandler(addedProducts, totalAmount);
   }
 
   const dispatch = useDispatch();
@@ -49,6 +56,13 @@ export default function HomeScreen({navigation}) {
 
   const resetOrderHandler = () => {
     dispatch(resetOrder());
+  }
+
+  const saveOrderHandler = (products, total) => {
+    dispatch(saveOrder(products, total));
+    orders.forEach(order => {
+      console.log(order);
+    })
   }
 
   return (
@@ -67,7 +81,7 @@ export default function HomeScreen({navigation}) {
         }
       </View>
       <View style={styles.counterContainer}>
-        <Text style={styles.orderTitle}>Order</Text>
+        <Text style={styles.orderTitle}>Order:</Text>
         {
           addedProducts.map((product, id) => {
             return(
@@ -91,7 +105,7 @@ export default function HomeScreen({navigation}) {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.checkoutButton, styles.payButton]}
-          onPress={cancelOrder}>
+          onPress={payForOrder}>
           <Text style={styles.buttonText}>PAY</Text>
         </TouchableOpacity>
         {/*

@@ -10,6 +10,6 @@ export const resetOrder = () => {
   return { type: RESET_ORDER }
 }
 
-export const saveOrder = (products, totalAmount) => {
-   return { type: SAVE_ORDER, order: order };
+export const saveOrder = (products, total) => {
+   return { type: SAVE_ORDER, products: products, total: total };
 }
