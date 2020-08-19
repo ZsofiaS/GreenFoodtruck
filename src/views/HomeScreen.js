@@ -71,19 +71,7 @@ export default function HomeScreen({navigation}) {
     <>
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
-      <View>
-        <Text>Orders:</Text>
-        {
-            orders.map((order, i) => {
-              return (
-                <View key={i}>
-                  <Text>£{order["total"]}</Text>
-                  <Text>{order["date"].toString()}</Text>
-                </View>
-              )
-            })
-          }
-      </View>
+
       <View style={styles.productContainer}>
         {
           availableProducts.map((product, i) => {
@@ -96,7 +84,7 @@ export default function HomeScreen({navigation}) {
         }
       </View>
       <View style={styles.counterContainer}>
-        <Text style={styles.orderTitle}>Order:</Text>
+        <Text style={styles.orderTitle}>Order details:</Text>
         {
           addedProducts.map((product, id) => {
             return(
@@ -110,7 +98,7 @@ export default function HomeScreen({navigation}) {
             )
           })
         }
-        <Text style={styles.orderTitle}>Total: £{totalAmount}</Text>
+        <Text style={styles.total}>Total: £{totalAmount}</Text>
       </View>
       <View style={styles.checkoutContainer}>
         <TouchableOpacity
@@ -150,7 +138,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 30
+    marginVertical: 5
   },
   productContainer: {
     marginHorizontal: 20,
@@ -166,7 +154,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   button: {
-    marginVertical: 10,
     marginHorizontal: 10,
     backgroundColor: 'white',
     padding: 10,
@@ -188,27 +175,33 @@ const styles = StyleSheet.create({
   },
   counterContainer: {
     flexDirection: 'column',
-    marginVertical: 20,
+    // marginVertical: 5,
   },
   counter: {
-    marginVertical: 5,
+    // marginVertical: 5,
     marginHorizontal: 10,
   },
   orderTitle: {
     fontSize: 20,
-    textAlign: 'left'
+    textAlign: 'left',
+    marginVertical: 5
+  },
+  total: {
+    fontSize: 20,
+    textAlign: 'right',
+    marginVertical: 5
   },
   title: {
-    marginVertical: 20,
+    marginVertical: 5,
     fontSize: 20
   },
   checkoutContainer: {
-    marginVertical: 20,
+    marginVertical: 5,
     marginHorizontal: 20,
     flexDirection: 'row'
   },
   checkoutButton: {
-    marginVertical: 10,
+    marginVertical: 5,
     marginHorizontal: 15,
     backgroundColor: 'gainsboro',
     padding: 10,
@@ -225,7 +218,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   cancelButton: {
-    backgroundColor: 'red'
+    backgroundColor: '#cc0000'
   },
   payButton: {
     backgroundColor: Colors.primaryColor
