@@ -4,6 +4,7 @@ import OrderAdded from '../../models/OrderAdded';
 import { ADD_PRODUCT }  from '../actions/orders';
 import { RESET_ORDER } from '../actions/orders';
 import { SAVE_ORDER } from '../actions/orders';
+import { SET_ORDERS } from '../actions/orders';
 
 const initialState = {
   products: products,
@@ -30,7 +31,11 @@ const orderReducer = (state = initialState, action) => {
           state.order[productId].sum + productPrice
         );
       } else {
-        productToBeAdded = new ProductAdded(1, productPrice, productName, productPrice);
+        productToBeAdded = new ProductAdded(
+          1,
+          productPrice,
+          productName,
+          productPrice);
       }
       return {
           ...state,
@@ -40,15 +45,25 @@ const orderReducer = (state = initialState, action) => {
     case RESET_ORDER:
       return { ...state, order: {}, totalAmount: 0}
     case SAVE_ORDER:
+      const orderId = action.id;
       const currentOrder = action.products;
-      const total = action.total
-      const date = new Date().toString();
-      let orderToBeAdded = new OrderAdded(currentOrder, total, date);
+      const total = action.total;
+      const date = action.date;
+      let orderToBeAdded = new OrderAdded(
+        orderId,
+        currentOrder,
+        total,
+        date);
       return {
         ...state,
         order: {},
         totalAmount: 0,
         orders: [...state.orders, orderToBeAdded]}
+    case SET_ORDERS:
+      return {
+        ...state,
+        orders: action.orders,
+      }
     default:
       return state;
   }

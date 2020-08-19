@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
+import React, {useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Button, ScrollView } from 'react-native';
 import prices from '../prices.json';
 import { withNavigation } from 'react-navigation';
@@ -9,12 +9,18 @@ import OrderItem from '../components/OrderItem';
 import {products} from '../../constants/Products';
 import Colors from '../../constants/Colors';
 import { useSelector, useDispatch } from 'react-redux';
-import { addProduct, resetOrder, saveOrder } from '../../store/actions/orders';
+import { addProduct, resetOrder, saveOrder, fetchOrders } from '../../store/actions/orders';
 import { useFirebase } from 'react-redux-firebase';
 
 export default function HomeScreen({navigation}) {
   const [total, setTotal] = useState(0);
   const firebase = useFirebase();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOrders());
+  }, [dispatch]);
 
   const availableProducts = useSelector(state => state.order.products);
   const totalAmount = useSelector(state => state.order.totalAmount);
@@ -45,10 +51,9 @@ export default function HomeScreen({navigation}) {
   }
 
   const payForOrder = () => {
-    saveOrderHandler(addedProducts, totalAmount);
+    saveOrderHandler(addedProducts, totalAmount, new Date());
+    console.log(orders);
   }
-
-  const dispatch = useDispatch();
 
   const addProductHandler = (product) => {
     dispatch(addProduct(product));
@@ -58,11 +63,8 @@ export default function HomeScreen({navigation}) {
     dispatch(resetOrder());
   }
 
-  const saveOrderHandler = (products, total) => {
-    dispatch(saveOrder(products, total));
-    orders.forEach(order => {
-      console.log(order);
-    })
+  const saveOrderHandler = (products, total, date) => {
+    dispatch(saveOrder(products, total, date));
   }
 
   return (
@@ -71,26 +73,7 @@ export default function HomeScreen({navigation}) {
     <View style={styles.container}>
       <View>
         <Text>Orders:</Text>
-        {
-          orders.map((order, i) => {
-            return (
-              <View key={i}>
-                <Text>£{order["total"]}</Text>
-                <Text>{order["date"]}</Text>
-                {
-                  order["products"].map((product, i) => {
-                    return(
-                    <View key={i}>
-                      <Text>{product["quantity"]}X {product["productName"]}</Text>
-                    </View>
-                  )
-                  })
-                }
 
-              </View>
-            )
-          })
-        }
       </View>
       <View style={styles.productContainer}>
         {
