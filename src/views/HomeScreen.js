@@ -73,7 +73,16 @@ export default function HomeScreen({navigation}) {
     <View style={styles.container}>
       <View>
         <Text>Orders:</Text>
-
+        {
+            orders.map((order, i) => {
+              return (
+                <View key={i}>
+                  <Text>£{order["total"]}</Text>
+                  <Text>{order["date"].toString()}</Text>
+                </View>
+              )
+            })
+          }
       </View>
       <View style={styles.productContainer}>
         {
