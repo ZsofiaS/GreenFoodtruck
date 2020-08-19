@@ -69,6 +69,29 @@ export default function HomeScreen({navigation}) {
     <>
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
+      <View>
+        <Text>Orders:</Text>
+        {
+          orders.map((order, i) => {
+            return (
+              <View key={i}>
+                <Text>£{order["total"]}</Text>
+                <Text>{order["date"]}</Text>
+                {
+                  order["products"].map((product, i) => {
+                    return(
+                    <View key={i}>
+                      <Text>{product["quantity"]}X {product["productName"]}</Text>
+                    </View>
+                  )
+                  })
+                }
+
+              </View>
+            )
+          })
+        }
+      </View>
       <View style={styles.productContainer}>
         {
           availableProducts.map((product, i) => {
