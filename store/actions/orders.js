@@ -33,7 +33,11 @@ export const fetchOrders = () => {
         total = total + order["total"];
       })
       //console.log(`Date: ${date}, total: ${total}`);
-      dailyReports.push({[date]: total});
+      dailyReports.push({
+        // [date]: total
+        date: date,
+        total: total
+      });
       console.log("yo")
     }
 

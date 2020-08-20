@@ -5,11 +5,12 @@ An app to follow sales and stock levels of a local foodtruck.
 ### Home screen
 ![screenshot home](./images/screen1.png)
 
-### Tech used:
+### Tech stack:
 * React Native
+* React Native Elements
 * Redux
-* React Native Firebase
-* Cypress
+* Firebase
+* React Native Charts Kit
 * Jest & React native testing library
 
 ### How to use:
