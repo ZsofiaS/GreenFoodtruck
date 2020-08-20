@@ -39,11 +39,6 @@ export default function HomeScreen({navigation}) {
   });
 
   const orders = useSelector(state => state.order.orders);
-  const reports = useSelector(state => state.order.reports);
-
-  const convertResults = () => {
-      console.log(reports)
-  }
 
   const calculateTotal = (product) => {
     addProductHandler(product);
@@ -75,28 +70,6 @@ export default function HomeScreen({navigation}) {
     <>
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
-      <View>
-        {
-          reports.map((report, i) => {
-            return(
-              <View key={i}>
-                {
-                  Object.keys(report).map(key => {
-                    return(
-                      <View key={key}>
-                        <Text>{key} £{report[key]}</Text>
-                      </View>
-                    )
-                  })
-                }
-              </View>
-            )
-          })
-        }
-
-      </View>
-
-
       <View style={styles.productContainer}>
         {
           availableProducts.map((product, i) => {
@@ -145,9 +118,9 @@ export default function HomeScreen({navigation}) {
         */}
       </View>
       <TouchableOpacity
-        style={[styles.checkoutButton, styles.payButton]}
-        onPress={convertResults}>
-        <Text style={styles.buttonText}>Orders</Text>
+        style={[styles.checkoutButton]}
+        onPress={() => navigation.navigate('Reports')}>
+        <Text style={styles.buttonText}>ORDERS</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
       </View>

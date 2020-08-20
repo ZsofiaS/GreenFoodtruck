@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import HomeScreen from './views/HomeScreen';
 import MaterialScreen from './views/MaterialScreen';
+import ReportScreen from './views/ReportScreen';
 import Colors from '../constants/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
@@ -20,6 +21,12 @@ const Navigator = createStackNavigator(
       screen: MaterialScreen,
       navigationOptions: {
         headerTitle: 'Materials',
+      }
+    },
+    Reports: {
+      screen: ReportScreen,
+      navigationOptions: {
+        headerTitle: 'Reports',
       }
     }
   },
