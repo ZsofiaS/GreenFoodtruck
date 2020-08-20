@@ -68,12 +68,34 @@ export default function HomeScreen({navigation}) {
 
   const saveOrderHandler = (products, total, date) => {
     dispatch(saveOrder(products, total, date));
+    dispatch(fetchOrders());
   }
 
   return (
     <>
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
+      <View>
+        {
+          reports.map((report, i) => {
+            return(
+              <View key={i}>
+                {
+                  Object.keys(report).map(key => {
+                    return(
+                      <View key={key}>
+                        <Text>{key} £{report[key]}</Text>
+                      </View>
+                    )
+                  })
+                }
+              </View>
+            )
+          })
+        }
+
+      </View>
+
 
       <View style={styles.productContainer}>
         {
