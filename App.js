@@ -5,10 +5,7 @@ import Navigator from './src/Navigator';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import orderReducer from './store/reducers/orders';
-import firebaseConfig from './config/firebase.js';
 import ReduxThunk from 'redux-thunk';
-
-// firebase.initializeApp(firebaseConfig);
 
 const rootReducer = combineReducers({
   order: orderReducer

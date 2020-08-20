@@ -32,7 +32,7 @@ export const resetOrder = () => {
   return { type: RESET_ORDER }
 }
 
-export const saveOrder = (products, total, date = new Date()) => {
+export const saveOrder = (products, total, date) => {
   return async dispatch => {
     //asyn code w/ Redux Thunk
     const response = await fetch('https://green-food-truck.firebaseio.com/orders.json', {

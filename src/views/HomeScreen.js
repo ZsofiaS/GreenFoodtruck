@@ -11,9 +11,9 @@ import Colors from '../../constants/Colors';
 import { useSelector, useDispatch } from 'react-redux';
 import { addProduct, resetOrder, saveOrder, fetchOrders } from '../../store/actions/orders';
 import { useFirebase } from 'react-redux-firebase';
+import moment from 'moment';
 
 export default function HomeScreen({navigation}) {
-  const [total, setTotal] = useState(0);
   const firebase = useFirebase();
 
   const dispatch = useDispatch();
@@ -41,18 +41,17 @@ export default function HomeScreen({navigation}) {
   const orders = useSelector(state => state.order.orders);
 
   const calculateTotal = (product) => {
-    setTotal(prevTotal => prevTotal + product.price);
     addProductHandler(product);
+    console.log(moment(Date.now(), 'x').format("DD-MM-YYYY"))
   }
 
   const cancelOrder = () => {
-    //setTotal(0);
     resetOrderHandler();
   }
 
   const payForOrder = () => {
-    saveOrderHandler(addedProducts, totalAmount, new Date());
-    console.log(orders);
+    let timeNow = moment(Date.now(), 'x').format('DD-MM-YYYY');
+    saveOrderHandler(addedProducts, totalAmount, timeNow);
   }
 
   const addProductHandler = (product) => {
