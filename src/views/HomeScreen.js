@@ -82,7 +82,7 @@ export default function HomeScreen({navigation}) {
         }
       </View>
       <View style={styles.counterContainer}>
-        <Text style={styles.orderTitle}>Order details:</Text>
+        <Text style={styles.orderTitle}>{addedProducts.length > 0 ? 'Order details:' : ''}</Text>
         {
           addedProducts.map((product, id) => {
             return(

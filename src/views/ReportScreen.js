@@ -30,7 +30,7 @@ export default function ReportScreen () {
                 }
               ]
             }}
-            width={Dimensions.get("window").width} // from react-native
+            width={Dimensions.get("window").width - 50} // from react-native
             height={220}
             yAxisLabel="£"
             yAxisInterval={3} // optional, defaults to 1
@@ -54,7 +54,8 @@ export default function ReportScreen () {
             segments={5}
             style={{
               marginVertical: 8,
-              borderRadius: 0
+              marginHorizontal: 25,
+              borderRadius: 8
             }}
           />
           </View>
@@ -80,9 +81,10 @@ const styles = StyleSheet.create({
       backgroundColor: 'white',
   },
   orderTitle: {
-    fontSize: 20,
+    fontSize: 27,
     textAlign: 'center',
-    marginVertical: 20
+    marginVertical: 20,
+    color: colours.primaryColor
   },
   listContainer: {
     marginVertical: 20,
