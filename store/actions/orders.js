@@ -20,7 +20,23 @@ export const fetchOrders = () => {
         )
       )
     }
-    dispatch({type: SET_ORDERS, orders: loadedOrders});
+
+    let groupedOrders = loadedOrders.reduce((r, a) => {
+      r[a["date"]] = r[a["date"]] || [];
+      r[a["date"]].push(a);
+      return r;
+    }, Object.create(null));
+    let dailyReports = [];
+    for (const [date, orders] of Object.entries(groupedOrders)) {
+      let total = 0;
+      orders.forEach(order => {
+        total = total + order["total"];
+      })
+      //console.log(`Date: ${date}, total: ${total}`);
+      dailyReports.push({[date]: total})
+    }
+
+    dispatch({type: SET_ORDERS, orders: loadedOrders, reports: dailyReports});
   }
 }
 

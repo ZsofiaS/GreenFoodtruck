@@ -39,10 +39,14 @@ export default function HomeScreen({navigation}) {
   });
 
   const orders = useSelector(state => state.order.orders);
+  const reports = useSelector(state => state.order.reports);
+
+  const convertResults = () => {
+      console.log(reports)
+  }
 
   const calculateTotal = (product) => {
     addProductHandler(product);
-    console.log(moment(Date.now(), 'x').format("DD-MM-YYYY"))
   }
 
   const cancelOrder = () => {
@@ -118,6 +122,11 @@ export default function HomeScreen({navigation}) {
         </TouchableOpacity>
         */}
       </View>
+      <TouchableOpacity
+        style={[styles.checkoutButton, styles.payButton]}
+        onPress={convertResults}>
+        <Text style={styles.buttonText}>Orders</Text>
+      </TouchableOpacity>
       <StatusBar style="auto" />
       </View>
     </ScrollView>

@@ -10,7 +10,8 @@ const initialState = {
   products: products,
   order: {},
   totalAmount: 0,
-  orders: []
+  orders: [],
+  reports: []
 }
 
 const orderReducer = (state = initialState, action) => {
@@ -63,6 +64,7 @@ const orderReducer = (state = initialState, action) => {
       return {
         ...state,
         orders: action.orders,
+        reports: action.reports
       }
     default:
       return state;
