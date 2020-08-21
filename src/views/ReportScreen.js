@@ -30,7 +30,7 @@ export default function ReportScreen () {
                 }
               ]
             }}
-            width={Dimensions.get("window").width - 50} // from react-native
+            width={Dimensions.get("window").width - 30} // from react-native
             height={220}
             yAxisLabel="£"
             yAxisInterval={3} // optional, defaults to 1
@@ -54,7 +54,7 @@ export default function ReportScreen () {
             segments={5}
             style={{
               marginVertical: 8,
-              marginHorizontal: 25,
+              marginHorizontal: 15,
               borderRadius: 8
             }}
           />
