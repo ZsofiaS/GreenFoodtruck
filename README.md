@@ -13,6 +13,10 @@ An app to follow sales and stock levels of a local foodtruck.
 * React Native Charts Kit
 * Jest & React native testing library
 
+### Features
+* Till - user can add items to order, cancel or save order
+* Sales report in chart format with live data
+
 ### How to use:
 
 * Clone this repo and navigate to the local folder
