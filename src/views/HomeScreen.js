@@ -1,29 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Button, ScrollView } from 'react-native';
-import prices from '../prices.json';
-import { withNavigation } from 'react-navigation';
 import Product from '../components/Product';
 import Header from '../components/Header';
 import OrderItem from '../components/OrderItem';
-import {products} from '../../constants/Products';
-import Colors from '../../constants/Colors';
+import { withNavigation } from 'react-navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { addProduct, resetOrder, saveOrder, fetchOrders } from '../../store/actions/orders';
-import { useFirebase } from 'react-redux-firebase';
 import moment from 'moment';
+import {products} from '../../constants/Products';
+import prices from '../../constants/prices.json';
+import Colors from '../../constants/Colors';
 
 export default function HomeScreen({navigation}) {
-  const firebase = useFirebase();
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchOrders());
-  }, [dispatch]);
-
   const availableProducts = useSelector(state => state.order.products);
+
   const totalAmount = useSelector(state => state.order.totalAmount);
+
   const addedProducts = useSelector(state => {
     const addedProductsArray = [];
     for (const key in state.order.order) {
@@ -66,66 +62,61 @@ export default function HomeScreen({navigation}) {
     dispatch(fetchOrders());
   }
 
+  useEffect(() => {
+    dispatch(fetchOrders());
+  }, [dispatch]);
+
   return (
-    <>
     <ScrollView contentContainerStyle={styles.scrollContainer}>
-    <View style={styles.container}>
-      <View style={styles.productContainer}>
-        {
-          availableProducts.map((product, i) => {
-            return(
-              <View key={i}>
-                <Product product={product} printProduct={() => calculateTotal(product)}/>
-              </View>
-            )
-          })
-        }
-      </View>
-      <View style={styles.counterContainer}>
-        <Text style={styles.orderTitle}>{addedProducts.length > 0 ? 'Order details:' : ''}</Text>
-        {
-          addedProducts.map((product, id) => {
-            return(
-              <OrderItem
-                key={product.productId}
-                name={product.productName}
-                price={product.productPrice}
-                quantity={product.quantity}
-                sum={product.sum}
-                />
-            )
-          })
-        }
-        <Text style={styles.total}>Total: £{totalAmount}</Text>
-      </View>
-      <View style={styles.checkoutContainer}>
+      <View style={styles.container}>
+        <View style={styles.productContainer}>
+          {
+            availableProducts.map((product, i) => {
+              return(
+                <View key={i}>
+                  <Product product={product} printProduct={() => calculateTotal(product)}/>
+                </View>
+              )
+            })
+          }
+        </View>
+        <View style={styles.counterContainer}>
+          <Text style={styles.orderTitle}>{addedProducts.length > 0 ? 'Order details:' : ''}</Text>
+          {
+            addedProducts.map((product, id) => {
+              return(
+                <OrderItem
+                  key={product.productId}
+                  name={product.productName}
+                  price={product.productPrice}
+                  quantity={product.quantity}
+                  sum={product.sum}
+                  />
+              )
+            })
+          }
+          <Text style={styles.total}>Total: £{totalAmount}</Text>
+        </View>
+        <View style={styles.checkoutContainer}>
+          <TouchableOpacity
+            style={[styles.checkoutButton, styles.cancelButton]}
+            onPress={cancelOrder}>
+            <Text style={styles.buttonText}>CANCEL</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.checkoutButton, styles.payButton]}
+            onPress={payForOrder}>
+            <Text style={styles.buttonText}>PAY</Text>
+          </TouchableOpacity>
+        </View>
         <TouchableOpacity
-          style={[styles.checkoutButton, styles.cancelButton]}
-          onPress={cancelOrder}>
-          <Text style={styles.buttonText}>CANCEL</Text>
+          style={[styles.checkoutButton]}
+          onPress={() => navigation.navigate('Reports')}>
+          <Text style={styles.buttonText}>ORDERS</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.checkoutButton, styles.payButton]}
-          onPress={payForOrder}>
-          <Text style={styles.buttonText}>PAY</Text>
-        </TouchableOpacity>
-        {/*
-        <TouchableOpacity
-          style={styles.checkoutButton}
-          onPress={() => navigation.navigate('Materials')}>
-            <Text>MATERIALS</Text>
-        </TouchableOpacity>
-        */}
-      </View>
-      <TouchableOpacity
-        style={[styles.checkoutButton]}
-        onPress={() => navigation.navigate('Reports')}>
-        <Text style={styles.buttonText}>ORDERS</Text>
-      </TouchableOpacity>
-      <StatusBar style="auto" />
+        <StatusBar style="auto" />
       </View>
     </ScrollView>
-    </>
   );
 }
 
