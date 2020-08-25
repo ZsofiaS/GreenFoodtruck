@@ -1,18 +1,22 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
-import Header from '../components/Header';
 import { useSelector } from 'react-redux';
 import { LineChart } from 'react-native-chart-kit';
+import Header from '../components/Header';
 import colours from '../../constants/Colors';
 
 export default function ReportScreen () {
 
   const reports = useSelector(state => state.order.reports);
+
   const labels = [];
+
   reports.forEach((report, i) => {
     labels.push(report.date);
   });
+
   const datasets = [];
+
   reports.forEach((data, i) => {
     datasets.push(data.total);
   })
@@ -30,10 +34,10 @@ export default function ReportScreen () {
                 }
               ]
             }}
-            width={Dimensions.get("window").width - 30} // from react-native
+            width={Dimensions.get("window").width - 30}
             height={220}
             yAxisLabel="£"
-            yAxisInterval={3} // optional, defaults to 1
+            yAxisInterval={3}
             chartConfig={{
               backgroundColor: colours.primaryColor,
               backgroundGradientFrom: colours.accentColor,
@@ -46,7 +50,7 @@ export default function ReportScreen () {
               propsForDots: {
                 r: "6",
                 strokeWidth: "2",
-                stroke: "#ffa726"
+                stroke: colours.primaryColor
               }
             }}
             onDataPointClick={(value) => console.log(value.value)}
@@ -59,19 +63,6 @@ export default function ReportScreen () {
             }}
           />
           </View>
-          {/*
-          <View style={styles.listContainer}>
-            {
-              reports.map((report, i) => {
-                return(
-                  <View key={i}>
-                    <Text>{report.date}: £{report.total}</Text>
-                  </View>
-                )
-              })
-            }
-          </View>
-          */}
         </View>
       );
 }
