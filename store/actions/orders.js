@@ -20,7 +20,7 @@ export const fetchOrders = () => {
         )
       )
     }
-
+    // group orders by date in an object
     let groupedOrders = loadedOrders.reduce((r, a) => {
       r[a["date"]] = r[a["date"]] || [];
       r[a["date"]].push(a);
@@ -32,15 +32,11 @@ export const fetchOrders = () => {
       orders.forEach(order => {
         total = total + order["total"];
       })
-      //console.log(`Date: ${date}, total: ${total}`);
       dailyReports.push({
-        // [date]: total
         date: date,
         total: total
       });
-      console.log("yo")
     }
-
     dispatch({type: SET_ORDERS, orders: loadedOrders, reports: dailyReports});
   }
 }
@@ -68,7 +64,6 @@ export const saveOrder = (products, total, date) => {
       })
     });
     const resData = await response.json();
-    console.log(resData);
 
     dispatch({
       type: SAVE_ORDER,
