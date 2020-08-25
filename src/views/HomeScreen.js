@@ -2,7 +2,6 @@ import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Button, ScrollView } from 'react-native';
 import Product from '../components/Product';
-import Header from '../components/Header';
 import OrderItem from '../components/OrderItem';
 import { withNavigation } from 'react-navigation';
 import { useSelector, useDispatch } from 'react-redux';

@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { useSelector } from 'react-redux';
 import { LineChart } from 'react-native-chart-kit';
-import Header from '../components/Header';
 import colours from '../../constants/Colors';
 
 export default function ReportScreen () {

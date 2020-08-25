@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { createAppContainer } from 'react-navigation';
-import Navigator from './src/Navigator';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import orderReducer from './store/reducers/orders';
 import ReduxThunk from 'redux-thunk';
+import Navigator from './src/Navigator';
+import orderReducer from './store/reducers/orders';
 
 const rootReducer = combineReducers({
   order: orderReducer

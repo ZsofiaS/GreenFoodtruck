@@ -8,7 +8,7 @@ export default function Product(props) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => props.printProduct()}
-        >
+      >
         <Image
           style={styles.image}
           source={{ uri: props.product.img }} />

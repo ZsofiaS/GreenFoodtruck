@@ -6,15 +6,13 @@ import MaterialScreen from './views/MaterialScreen';
 import ReportScreen from './views/ReportScreen';
 import Colors from '../constants/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import HeaderButton from './components/HeaderButton';
 
 const Navigator = createStackNavigator(
   {
     Home: {
       screen: HomeScreen,
       navigationOptions: {
-        headerTitle: 'Home',
+        headerTitle: 'Green Food Truck',
       }
     },
     Materials: {
