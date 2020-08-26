@@ -1,4 +1,4 @@
-# Green Foodtruck
+# Green Foodtruck - in progress
 
 An app to follow sales and stock levels of a local foodtruck.
 
@@ -32,7 +32,7 @@ expo start
 * On Android, use the Expo app to scan the QR code from the terminal to open the project.
 * On iOS, follow on-screen instructions to get a link.
 
-### How to run tests:
+### How to run tests (tests in progress):
 
 * Start the app in the browser
 ```
