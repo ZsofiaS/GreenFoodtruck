@@ -11,7 +11,7 @@ An app to follow sales and stock levels of a local foodtruck.
 * Redux
 * Firebase
 * React Native Charts Kit
-* Jest & React native testing library
+(* Jest & React native testing library)
 
 ### Features
 * Till - user can add items to order, cancel or save order
@@ -31,17 +31,3 @@ expo start
 * Install the Expo client app on your iOS or Android phone, connect to the same wireless network as your computer
 * On Android, use the Expo app to scan the QR code from the terminal to open the project.
 * On iOS, follow on-screen instructions to get a link.
-
-### How to run tests (tests in progress):
-
-* Start the app in the browser
-```
-expo start -w
-```
-This starts the app on localhost.
-* In the `cypress.json` file, replace the `baseUrl` with your own `<localhost>:<port>`, where url is the port where the app is running.
-
-* Run the tests in the terminal while the app is running:
-```
-npx cypress open
-```

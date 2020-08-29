@@ -50,7 +50,6 @@
     "@wdio/sync": "^6.3.3",
     "appium": "^1.18.0",
     "babel-jest": "~25.2.6",
-    "cypress": "^4.11.0",
     "jest": "~25.2.6",
     "react-test-renderer": "~16.11.0",
     "wdio-json-reporter": "^2.0.0"
